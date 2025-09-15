@@ -1,4 +1,8 @@
+# AI Wellness Journal
 A modern web application for tracking health symptoms, generating AI-powered health insights, and visualizing health patterns over time. Built with Next.js, TypeScript, Supabase, and Google Gemini API.
+
+[![YouTube Demo](https://img.shields.io/badge/▶️%20Watch%20on%20YouTube-red?logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=myZLzRm9C4Q)
+[![Watch the demo](https://img.youtube.com/vi/myZLzRm9C4Q/maxresdefault.jpg)](https://www.youtube.com/watch?v=myZLzRm9C4Q)
 
 ## Features
 
