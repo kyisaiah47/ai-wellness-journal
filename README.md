@@ -1,116 +1,70 @@
-# AI Wellness Journal
-A modern web application for tracking health symptoms, generating AI-powered health insights, and visualizing health patterns over time. Built with Next.js, TypeScript, Supabase, and Google Gemini API.
+<div align="center">
 
-[![YouTube Demo](https://img.shields.io/badge/▶️%20Watch%20on%20YouTube-red?logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=myZLzRm9C4Q)
-[![Watch the demo](https://img.youtube.com/vi/myZLzRm9C4Q/maxresdefault.jpg)](https://www.youtube.com/watch?v=myZLzRm9C4Q)
+<!-- BANNER_PLACEHOLDER -->
 
-## Features
+# 🩺 AI Wellness Journal
 
-- Log daily symptoms, severity, and notes
-- View health timelines and pattern analysis
-- Get AI-generated health summaries and recommendations
-- Doctor report and quick stats
-- Responsive, user-friendly UI
+**Track symptoms, get AI-powered insights, and walk into doctor appointments prepared**
 
-## Tech Stack
+[![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com)
+[![Gemini](https://img.shields.io/badge/Google%20Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 
-- **Next.js** (React framework)
-- **TypeScript**
-- **Supabase** (database & auth)
-- **Google Gemini API** (AI insights)
-- **Tailwind CSS** (styling)
-- **Lucide Icons**
+</div>
 
-## Getting Started
+<br/>
 
-### Prerequisites
+AI Wellness Journal lets you log daily symptoms with severity ratings and personal notes, then surfaces AI-powered health summaries and pattern analysis over time. It generates structured doctor-ready reports so you arrive at every appointment with clear, organized context — shifting healthcare from reactive to preventive.
 
-- Node.js (v18+ recommended)
-- Supabase project & API keys
-- Google Gemini API key
+## ✨ Features
 
-### Installation
+- **Symptom Logging** — Record daily symptoms, severity levels, and freeform notes in seconds
+- **Health Timeline** — Visualize patterns and trends across your symptom history
+- **AI-Powered Insights** — Google Gemini analyzes your logs and generates personalized health summaries
+- **Doctor Report Generation** — Produce structured, shareable reports that make appointments more productive
+- **Quick Stats Dashboard** — At-a-glance view of your recent health activity and recurring patterns
+- **Responsive UI** — Clean, accessible interface built for both desktop and mobile
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/symptom-journal.git
-   cd symptom-journal
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Set up environment variables:
-   - Copy `.env.local.example` to `.env.local` and fill in your Supabase and Gemini API keys.
+## 🎥 Demo
 
-### Running Locally
+[![Watch Demo](https://img.shields.io/badge/YouTube-Watch%20Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=myZLzRm9C4Q)
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | Next.js (App Router) |
+| Language | TypeScript |
+| Database & Auth | Supabase |
+| AI | Google Gemini API |
+| Styling | Tailwind CSS + Lucide Icons |
+
+## 🚀 Getting Started
+
+**Prerequisites:** Node.js v18+, a Supabase project, and a Google Gemini API key.
 
 ```bash
+git clone https://github.com/kyisaiah47/ai-wellness-journal.git
+cd ai-wellness-journal
+npm install
+cp .env.local.example .env.local   # fill in your Supabase + Gemini keys
 npm run dev
 ```
 
-Visit [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000) to view the app.
 
-## Project Structure
+### Environment Variables
 
 ```
-public/           # Static assets
-src/
-  api/            # API routes
-  app/            # Next.js app directory
-  components/     # React components
-  lib/            # Utility libraries (Supabase, Gemini)
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+NEXT_PUBLIC_GOOGLE_API_KEY=
 ```
 
-## Environment Variables
+> **Disclaimer:** AI insights are for informational purposes only and do not replace professional medical advice.
 
-- `NEXT_PUBLIC_SUPABASE_URL` - Supabase project URL
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Supabase anon key
-- `NEXT_PUBLIC_GOOGLE_API_KEY` - Google Gemini API key
-
-## Deployment
-
-You can deploy to Vercel or any platform supporting Next.js. Set environment variables in your deployment dashboard.
-
-## License
+## 📄 License
 
 MIT
-
-## Disclaimer
-
-AI insights are for informational purposes only and do not replace professional medical advice.
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
