@@ -6,9 +6,9 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 // Table names. The Supabase project is shared with another production app,
-// so everything belonging to this app is prefixed with `wellness_`.
-export const ENTRIES_TABLE = "wellness_entries";
-export const REPORTS_TABLE = "wellness_reports";
+// so everything belonging to this app is prefixed with `charted_`.
+export const ENTRIES_TABLE = "charted_entries";
+export const REPORTS_TABLE = "charted_reports";
 
 export type { WellnessEntry, SymptomAnalysis } from "@/lib/types";
 

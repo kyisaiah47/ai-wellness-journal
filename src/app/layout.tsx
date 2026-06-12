@@ -6,7 +6,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-	title: "Pulse Journal — Daily Wellness Tracking",
+	title: "Charted — Daily Wellness Tracking",
 	description:
 		"Log daily symptoms, watch your wellness score, and generate AI-assisted summaries and doctor-ready reports.",
 };
@@ -27,7 +27,7 @@ export default function RootLayout({
 							<span className="font-semibold text-mist">
 								Not medical advice.
 							</span>{" "}
-							Pulse Journal is a personal symptom log. Scores, insights, and
+							Charted is a personal symptom log. Scores, insights, and
 							reports are generated from your own entries for informational
 							purposes only — they are not a diagnosis and are no substitute
 							for professional medical examination or advice. If you are
@@ -35,7 +35,7 @@ export default function RootLayout({
 							call your local emergency number.
 						</p>
 						<div className="flex items-center gap-5 text-xs text-faint">
-							<span>© {new Date().getFullYear()} Pulse Journal</span>
+							<span>© {new Date().getFullYear()} Charted</span>
 							<Link
 								href="/privacy"
 								className="hover:text-snow transition-colors underline underline-offset-2"

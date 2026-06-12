@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-	title: "Privacy — Pulse Journal",
-	description: "What Pulse Journal stores, how it's processed, and your rights.",
+	title: "Privacy — Charted",
+	description: "What Charted stores, how it's processed, and your rights.",
 };
 
 export default function PrivacyPage() {
@@ -73,7 +73,7 @@ export default function PrivacyPage() {
 				<section>
 					<h2 className="text-snow font-semibold mb-2">Not medical advice</h2>
 					<p>
-						Pulse Journal is a personal logging tool. Scores, insights, and
+						Charted is a personal logging tool. Scores, insights, and
 						reports are informational only and are not medical advice,
 						diagnosis, or treatment. Always consult a healthcare professional
 						about your health.

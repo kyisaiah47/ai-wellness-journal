@@ -114,7 +114,7 @@ export default function DoctorReport({ entries }: Props) {
 	<p class="meta">Period: ${period} &nbsp;·&nbsp; Generated ${format(
 			new Date(),
 			"PPp"
-		)} &nbsp;·&nbsp; Source: patient-logged entries (Pulse Journal)</p>
+		)} &nbsp;·&nbsp; Source: patient-logged entries (Charted)</p>
 	<p class="meta">Suggested follow-up urgency: <span class="urgency">${escapeHtml(
 		urgency.label
 	)}</span></p>
