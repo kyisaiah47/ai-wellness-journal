@@ -13,9 +13,9 @@ interface Props {
 type Report = SymptomAnalysis & { entries: WellnessEntry[] };
 
 const URGENCY_STYLE: Record<string, { color: string; label: string }> = {
-	low: { color: "#2dd4bf", label: "Low priority" },
-	medium: { color: "#facc15", label: "Medium priority" },
-	high: { color: "#f87171", label: "High priority" },
+	low: { color: "#0d9488", label: "Low priority" },
+	medium: { color: "#d97706", label: "Medium priority" },
+	high: { color: "#dc2626", label: "High priority" },
 };
 
 const escapeHtml = (s: string) =>

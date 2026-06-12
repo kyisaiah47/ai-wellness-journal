@@ -28,9 +28,9 @@ const METRICS: { id: Metric; label: string }[] = [
 ];
 
 const METRIC_COLOR: Record<Metric, string> = {
-	score: "#2dd4bf",
-	severity: "#f87171",
-	symptoms: "#facc15",
+	score: "#0d9488",
+	severity: "#dc2626",
+	symptoms: "#d97706",
 };
 
 export default function TrendChart({ points, onLog }: Props) {
@@ -124,27 +124,27 @@ export default function TrendChart({ points, onLog }: Props) {
 							/>
 							<XAxis
 								dataKey="label"
-								tick={{ fill: "#5b6770", fontSize: 11 }}
-								axisLine={{ stroke: "#1f2933" }}
+								tick={{ fill: "#a39f93", fontSize: 11 }}
+								axisLine={{ stroke: "#e8e5da" }}
 								tickLine={false}
 								minTickGap={28}
 							/>
 							<YAxis
 								domain={domain}
-								tick={{ fill: "#5b6770", fontSize: 11 }}
+								tick={{ fill: "#a39f93", fontSize: 11 }}
 								axisLine={false}
 								tickLine={false}
 								width={40}
 							/>
 							<Tooltip
 								contentStyle={{
-									background: "#161d24",
-									border: "1px solid #1f2933",
+									background: "#f3f1e9",
+									border: "1px solid #e8e5da",
 									borderRadius: 10,
 									fontSize: 12,
-									color: "#e6edf3",
+									color: "#201b21",
 								}}
-								labelStyle={{ color: "#8b98a5" }}
+								labelStyle={{ color: "#6b6860" }}
 								formatter={(value: number | string) => [
 									value,
 									metric === "score"

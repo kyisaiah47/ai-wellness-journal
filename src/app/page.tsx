@@ -206,7 +206,7 @@ export default function Dashboard() {
 								</div>
 								<span
 									className="h-1.5 w-1.5 rounded-full"
-									style={{ background: color ?? "#1f2933" }}
+									style={{ background: color ?? "#e8e5da" }}
 								/>
 							</div>
 						);
@@ -222,7 +222,7 @@ export default function Dashboard() {
 							<ScoreRing score={loading ? null : score} />
 							<p
 								className="mt-1 text-sm font-semibold"
-								style={{ color: band ? BAND_COLOR[band] : "#5b6770" }}
+								style={{ color: band ? BAND_COLOR[band] : "#a39f93" }}
 							>
 								{loading
 									? "Loading…"
@@ -439,7 +439,7 @@ function Contributor({
 }) {
 	const color =
 		fraction === null
-			? "#1f2933"
+			? "#e8e5da"
 			: BAND_COLOR[bandForScore(Math.round(fraction * 100))];
 	return (
 		<div>

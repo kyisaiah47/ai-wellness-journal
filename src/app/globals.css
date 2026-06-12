@@ -1,22 +1,24 @@
 @import "tailwindcss";
 
 /*
- * Whoop / Oura inspired dark system:
- * near-black canvas, soft panel surfaces, restrained teal/yellow/red accents.
+ * Clean, warm light system (interview-tree feel):
+ * paper-white canvas with the brand-sheet cream undertone,
+ * ink text, restrained teal/amber/red accents.
+ * Token names kept from the dark era — values flipped.
  */
 @theme {
-	--color-ink: #0a0e12; /* page background */
-	--color-panel: #11161c; /* card surface */
-	--color-panel-2: #161d24; /* raised / hover surface */
-	--color-edge: #1f2933; /* hairline borders */
-	--color-snow: #e6edf3; /* primary text */
-	--color-mist: #8b98a5; /* secondary text */
-	--color-faint: #5b6770; /* tertiary text */
-	--color-good: #2dd4bf; /* teal — good */
-	--color-warn: #facc15; /* yellow — neutral */
-	--color-bad: #f87171; /* red — bad */
-	--color-edge-bright: #2a3744; /* hover borders */
-	--color-glow: rgba(45, 212, 191, 0.16); /* teal recovery-screen glow */
+	--color-ink: #faf9f3; /* page background (warm paper) */
+	--color-panel: #ffffff; /* card surface */
+	--color-panel-2: #f3f1e9; /* raised / hover surface */
+	--color-edge: #e8e5da; /* hairline borders */
+	--color-snow: #201b21; /* primary text (brand ink) */
+	--color-mist: #6b6860; /* secondary text */
+	--color-faint: #a39f93; /* tertiary text */
+	--color-good: #0d9488; /* teal — good */
+	--color-warn: #d97706; /* amber — neutral */
+	--color-bad: #dc2626; /* red — bad */
+	--color-edge-bright: #d8d4c6; /* hover borders */
+	--color-glow: rgba(13, 148, 136, 0.1); /* soft teal halo */
 
 	/* Sora carries the display voice (scores, stat values, headlines);
 	   Inter stays on body copy. */
@@ -25,7 +27,7 @@
 }
 
 :root {
-	color-scheme: dark;
+	color-scheme: light;
 }
 
 html {
@@ -33,8 +35,8 @@ html {
 }
 
 body {
-	background: #0a0e12;
-	color: #e6edf3;
+	background: #faf9f3;
+	color: #201b21;
 	font-family: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 }
@@ -53,9 +55,9 @@ body {
 	background: var(--color-panel);
 	border: 1px solid var(--color-edge);
 	box-shadow:
-		inset 0 1px 0 rgba(230, 237, 243, 0.04),
-		0 1px 2px rgba(0, 0, 0, 0.45),
-		0 12px 32px -16px rgba(0, 0, 0, 0.7);
+		inset 0 1px 0 rgba(255, 255, 255, 0.9),
+		0 1px 2px rgba(32, 27, 33, 0.04),
+		0 8px 24px -12px rgba(32, 27, 33, 0.1);
 }
 
 .card-lift {
@@ -66,17 +68,17 @@ body {
 	transform: translateY(-3px);
 	border-color: var(--color-edge-bright);
 	box-shadow:
-		inset 0 1px 0 rgba(230, 237, 243, 0.07),
-		0 2px 4px rgba(0, 0, 0, 0.45),
-		0 22px 44px -18px rgba(0, 0, 0, 0.8);
+		inset 0 1px 0 rgba(255, 255, 255, 0.95),
+		0 2px 4px rgba(32, 27, 33, 0.05),
+		0 16px 36px -14px rgba(32, 27, 33, 0.16);
 }
 
-/* Soft teal radial glow behind the score ring (Whoop recovery light) */
+/* Soft teal halo behind the score ring */
 .score-glow {
 	background: radial-gradient(
 		closest-side,
 		var(--color-glow),
-		rgba(45, 212, 191, 0.05) 55%,
+		rgba(13, 148, 136, 0.04) 55%,
 		transparent 75%
 	);
 	pointer-events: none;
@@ -139,7 +141,7 @@ body {
 }
 
 ::selection {
-	background: rgba(45, 212, 191, 0.25);
+	background: rgba(13, 148, 136, 0.18);
 }
 
 ::-webkit-scrollbar {
@@ -147,23 +149,23 @@ body {
 	height: 10px;
 }
 ::-webkit-scrollbar-track {
-	background: #0a0e12;
+	background: #faf9f3;
 }
 ::-webkit-scrollbar-thumb {
-	background: #1f2933;
+	background: #e8e5da;
 	border-radius: 5px;
-	border: 2px solid #0a0e12;
+	border: 2px solid #faf9f3;
 }
 ::-webkit-scrollbar-thumb:hover {
-	background: #2a3744;
+	background: #d8d4c6;
 }
 
-/* Dark-native form controls */
+/* Light form controls */
 input[type="date"],
 textarea {
-	color: #e6edf3;
-	background: #161d24;
-	border: 1px solid #1f2933;
+	color: #201b21;
+	background: #ffffff;
+	border: 1px solid #e8e5da;
 	border-radius: 10px;
 	font-size: 0.9375rem;
 	transition: border-color 0.15s ease, box-shadow 0.15s ease;
@@ -171,19 +173,18 @@ textarea {
 
 input[type="date"]:focus,
 textarea:focus {
-	border-color: #2dd4bf;
-	box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.12);
+	border-color: #0d9488;
+	box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.12);
 	outline: none;
 }
 
 input::placeholder,
 textarea::placeholder {
-	color: #5b6770;
+	color: #a39f93;
 	opacity: 1;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-	filter: invert(0.7);
 	cursor: pointer;
 }
 
@@ -194,7 +195,7 @@ input[type="range"] {
 	width: 100%;
 	height: 4px;
 	border-radius: 2px;
-	background: #1f2933;
+	background: #e8e5da;
 	outline: none;
 }
 input[type="range"]::-webkit-slider-thumb {
@@ -203,17 +204,17 @@ input[type="range"]::-webkit-slider-thumb {
 	width: 18px;
 	height: 18px;
 	border-radius: 50%;
-	background: #e6edf3;
-	border: 3px solid #0a0e12;
-	box-shadow: 0 0 0 1px #2a3744;
+	background: #201b21;
+	border: 3px solid #faf9f3;
+	box-shadow: 0 0 0 1px #d8d4c6;
 	cursor: pointer;
 }
 input[type="range"]::-moz-range-thumb {
 	width: 18px;
 	height: 18px;
 	border-radius: 50%;
-	background: #e6edf3;
-	border: 3px solid #0a0e12;
-	box-shadow: 0 0 0 1px #2a3744;
+	background: #201b21;
+	border: 3px solid #faf9f3;
+	box-shadow: 0 0 0 1px #d8d4c6;
 	cursor: pointer;
 }

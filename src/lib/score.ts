@@ -20,9 +20,9 @@ export function bandForScore(score: number): ScoreBand {
 }
 
 export const BAND_COLOR: Record<ScoreBand, string> = {
-	good: "#2dd4bf", // teal
-	neutral: "#facc15", // restrained yellow
-	bad: "#f87171", // red
+	good: "#0d9488", // teal
+	neutral: "#d97706", // restrained yellow
+	bad: "#dc2626", // red
 };
 
 export const BAND_LABEL: Record<ScoreBand, string> = {
