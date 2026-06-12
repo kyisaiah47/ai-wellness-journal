@@ -25,7 +25,7 @@ export function SiteHeader({
 				<div className="ml-auto">
 					<button
 						onClick={onLog}
-						className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-snow text-ink text-sm font-semibold hover:opacity-90 transition-opacity"
+						className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-spark text-white text-sm font-semibold hover:opacity-90 transition-opacity"
 					>
 						<PlusIcon className="h-4 w-4" strokeWidth={2.5} />
 						{demo ? "Start yours" : "Log entry"}

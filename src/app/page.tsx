@@ -6,7 +6,6 @@ import { X } from "lucide-react";
 import type { Session } from "@supabase/supabase-js";
 import { supabase, ENTRIES_TABLE } from "@/lib/supabase";
 import WelcomeModal from "@/components/WelcomeModal";
-import { WaveDivider } from "@/components/Logo";
 import { SAMPLE_ENTRIES } from "@/lib/sample";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SiteHeader } from "@/components/site-header";
@@ -177,44 +176,38 @@ export default function Dashboard() {
 					</div>
 				)}
 
+				{activeTab === "timeline" && (
+				<>
 				{/* Greeting */}
-				<div className="mb-6 animate-fade-up">
-					<p className="text-sm text-mist">
-						{demo ? "Welcome to Charted — this is a sample month" : "Welcome back"}
-					</p>
-					<h1 className="font-display text-2xl font-bold text-snow">
-						How are you feeling today?
-					</h1>
-				</div>
-
-				{/* Day strip */}
-				<div className="flex justify-between sm:justify-center sm:gap-6 mb-8 animate-fade-up">
-					{strip.map(({ date, point, isToday }) => {
-						const color = point ? BAND_COLOR[bandForScore(point.score)] : null;
-						return (
-							<div
-								key={date.toISOString()}
-								className="flex flex-col items-center gap-1.5"
-							>
-								<span className="text-[10px] font-medium uppercase tracking-wider text-faint">
-									{format(date, "EEEEE")}
-								</span>
+				<div className="mb-6 flex items-end justify-between animate-fade-up">
+					<div>
+						<p className="text-sm text-mist">
+							{demo ? "Welcome to Charted — this is a sample month" : "Welcome back"}
+						</p>
+						<h1 className="font-display text-2xl font-bold text-snow">
+							How are you feeling today?
+						</h1>
+					</div>
+					<div className="hidden md:flex gap-2">
+						{strip.map(({ date, point, isToday }) => {
+							const color = point ? BAND_COLOR[bandForScore(point.score)] : null;
+							return (
 								<div
-									className={`h-9 w-9 rounded-full flex items-center justify-center text-xs tnum ${
-										isToday
-											? "border border-snow/60 text-snow"
-											: "text-mist"
+									key={date.toISOString()}
+									title={format(date, "EEEE d")}
+									className={`h-8 w-8 rounded-full flex items-center justify-center text-xs tnum font-medium ${
+										isToday ? "ring-2 ring-snow/50" : ""
 									}`}
+									style={{
+										background: color ? `${color}22` : "#ffffff",
+										color: color ?? "#bcb0a2",
+									}}
 								>
 									{format(date, "d")}
 								</div>
-								<span
-									className="h-1.5 w-1.5 rounded-full"
-									style={{ background: color ?? "#e4e4e7" }}
-								/>
-							</div>
-						);
-					})}
+							);
+						})}
+					</div>
 				</div>
 
 				{/* Hero: today's day-card + breakdown */}
@@ -246,7 +239,7 @@ export default function Dashboard() {
 							{!loading && !band && (
 								<button
 									onClick={() => (demo ? setShowWelcome(true) : setShowLog(true))}
-									className="mt-3 px-4 py-2 rounded-full bg-snow text-ink text-sm font-semibold hover:opacity-90 transition-opacity"
+									className="mt-3 px-4 py-2 rounded-full bg-spark text-white text-sm font-semibold hover:opacity-90 transition-opacity"
 								>
 									How was today?
 								</button>
@@ -354,9 +347,10 @@ export default function Dashboard() {
 					<TrendChart points={points} onLog={() => setShowLog(true)} />
 				</section>
 
-				<WaveDivider className="mb-8" />
+				</>
+				)}
 
-				<section className="rounded-3xl card">
+				<section className={activeTab === "timeline" ? "rounded-3xl card" : "rounded-3xl card animate-fade-up"}>
 					{activeTab === "timeline" && (
 						<HealthTimeline entries={entries} onLog={() => setShowLog(true)} />
 					)}

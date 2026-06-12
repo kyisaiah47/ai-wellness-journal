@@ -94,7 +94,7 @@ export default function WelcomeModal({ onClose }: { onClose: () => void }) {
 							</div>
 							<button
 								onClick={() => setStep(step + 1)}
-								className="px-4 py-2 rounded-full bg-snow text-ink text-sm font-semibold hover:opacity-90 transition-opacity"
+								className="px-4 py-2 rounded-full bg-spark text-white text-sm font-semibold hover:opacity-90 transition-opacity"
 							>
 								{story.cta}
 							</button>
@@ -135,7 +135,7 @@ export default function WelcomeModal({ onClose }: { onClose: () => void }) {
 							<button
 								type="submit"
 								disabled={busy}
-								className="w-full py-2.5 rounded-full bg-snow text-ink text-sm font-semibold hover:opacity-90 transition-opacity disabled:opacity-50"
+								className="w-full py-2.5 rounded-full bg-spark text-white text-sm font-semibold hover:opacity-90 transition-opacity disabled:opacity-50"
 							>
 								{busy ? "One moment…" : mode === "signup" ? "Create account" : "Sign in"}
 							</button>

@@ -1,10 +1,10 @@
 import type { ScoreBand } from "@/lib/score";
 
 const BLOB_FILL: Record<ScoreBand | "none", string> = {
-	good: "#2f8a5e",
-	neutral: "#d97e2f",
-	bad: "#bd5a46",
-	none: "#d8c8b4",
+	good: "#f47d31",
+	neutral: "#f08032",
+	bad: "#b8472c",
+	none: "#e4ded2",
 };
 
 /* Headspace-style companion: a soft blob whose face follows the day. */
@@ -22,21 +22,21 @@ export default function DayBlob({
 				fill={BLOB_FILL[band]}
 			/>
 			{band === "good" && (
-				<g stroke="#1f3528" strokeWidth="5" strokeLinecap="round" fill="none">
+				<g stroke="#3d3c3c" strokeWidth="5" strokeLinecap="round" fill="none">
 					<path d="M38 52c4-6 12-6 16 0" />
 					<path d="M66 52c4-6 12-6 16 0" />
 					<path d="M40 74c8 10 32 10 40 0" />
 				</g>
 			)}
 			{band === "neutral" && (
-				<g stroke="#3d2a17" strokeWidth="5" strokeLinecap="round" fill="none">
+				<g stroke="#3d3c3c" strokeWidth="5" strokeLinecap="round" fill="none">
 					<path d="M38 52c4-6 12-6 16 0" />
 					<path d="M66 52c4-6 12-6 16 0" />
 					<path d="M44 76h32" />
 				</g>
 			)}
 			{band === "bad" && (
-				<g stroke="#3a201a" strokeWidth="5" strokeLinecap="round" fill="none">
+				<g stroke="#2e1610" strokeWidth="5" strokeLinecap="round" fill="none">
 					<path d="M38 54c4-6 12-6 16 0" />
 					<path d="M66 54c4-6 12-6 16 0" />
 					<path d="M42 80c8-8 28-8 36 0" />

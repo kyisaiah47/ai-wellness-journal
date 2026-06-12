@@ -61,7 +61,7 @@ export function AppSidebar({
 							<SidebarMenuItem>
 								<SidebarMenuButton
 									onClick={onLog}
-									className="bg-snow text-ink font-semibold hover:bg-snow/90 hover:text-ink justify-center mb-2"
+									className="bg-spark text-white font-semibold hover:bg-spark/90 hover:text-white justify-center mb-2"
 								>
 									<PlusIcon />
 									<span>{demo ? "Start your journal" : "How was today?"}</span>

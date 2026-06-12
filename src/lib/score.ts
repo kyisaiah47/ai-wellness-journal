@@ -34,10 +34,10 @@ export const BAND_LABEL: Record<ScoreBand, string> = {
 /* Illustrated-cover gradients for the day card — green mountains on a good
    day, warm sunset on a rough one. */
 export const BAND_GRADIENT: Record<ScoreBand | "none", string> = {
-	good: "linear-gradient(140deg, #c9e9c8 0%, #84cb9d 55%, #4fa57f 100%)",
-	neutral: "linear-gradient(140deg, #ffdcab 0%, #f5a45e 60%, #e3814a 100%)",
-	bad: "linear-gradient(140deg, #f6b48d 0%, #e57e5d 55%, #c95f4d 100%)",
-	none: "linear-gradient(140deg, #f4ece1 0%, #e7d8c6 100%)",
+	good: "linear-gradient(140deg, #ffd84d 0%, #fcae17 60%, #f7941d 100%)",
+	neutral: "linear-gradient(140deg, #ffe9b8 0%, #ffc46b 60%, #f9a03f 100%)",
+	bad: "linear-gradient(140deg, #f98e5e 0%, #ef6c3d 55%, #d94f2e 100%)",
+	none: "linear-gradient(140deg, #f6f4ef 0%, #ece8df 100%)",
 };
 
 export interface DayPoint {
