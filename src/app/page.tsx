@@ -5,8 +5,9 @@ import { format, subDays, isSameDay } from "date-fns";
 import { Plus, X, LogOut } from "lucide-react";
 import type { Session } from "@supabase/supabase-js";
 import { supabase, ENTRIES_TABLE } from "@/lib/supabase";
-import Landing from "@/components/Landing";
+import WelcomeModal from "@/components/WelcomeModal";
 import Logo, { WaveBackdrop, WaveDivider } from "@/components/Logo";
+import { SAMPLE_ENTRIES } from "@/lib/sample";
 import type { WellnessEntry } from "@/lib/types";
 import {
 	dailyPoints,
@@ -32,6 +33,8 @@ export default function Dashboard() {
 	const [showLog, setShowLog] = useState(false);
 	const [session, setSession] = useState<Session | null>(null);
 	const [authReady, setAuthReady] = useState(false);
+	const [showWelcome, setShowWelcome] = useState(false);
+	const demo = authReady && !session;
 
 	useEffect(() => {
 		supabase.auth.getSession().then(({ data }) => {
@@ -47,14 +50,19 @@ export default function Dashboard() {
 	}, []);
 
 	useEffect(() => {
+		if (!authReady) return;
 		if (session) {
+			setShowWelcome(false);
 			setLoading(true);
 			loadEntries();
 		} else {
-			setEntries([]);
+			// Signed out: open the journal with sample data + the welcome story.
+			setEntries(SAMPLE_ENTRIES);
+			setLoading(false);
+			setShowWelcome(true);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [session?.user.id]);
+	}, [authReady, session?.user.id]);
 
 	const loadEntries = async () => {
 		try {
@@ -139,9 +147,6 @@ export default function Dashboard() {
 	if (!authReady) {
 		return <div className="min-h-screen" />;
 	}
-	if (!session) {
-		return <Landing />;
-	}
 
 	return (
 		<div className="min-h-screen">
@@ -155,27 +160,34 @@ export default function Dashboard() {
 						</span>
 					</div>
 					<div className="flex items-center gap-2">
+						{demo && (
+							<span className="hidden sm:inline text-xs text-faint mr-1">
+								Sample journal
+							</span>
+						)}
 						<button
-							onClick={() => setShowLog(true)}
-							className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-good text-ink text-sm font-semibold hover:opacity-90 transition-opacity"
+							onClick={() => (demo ? setShowWelcome(true) : setShowLog(true))}
+							className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-snow text-ink text-sm font-semibold hover:opacity-90 transition-opacity"
 						>
 							<Plus className="h-4 w-4" strokeWidth={2.5} />
-							Log entry
+							{demo ? "Start yours" : "Log entry"}
 						</button>
-						<button
-							onClick={() => supabase.auth.signOut()}
-							className="p-2 rounded-full text-mist hover:text-snow hover:bg-panel-2 transition-colors"
-							aria-label="Sign out"
-							title="Sign out"
-						>
-							<LogOut className="h-4 w-4" />
-						</button>
+						{!demo && (
+							<button
+								onClick={() => supabase.auth.signOut()}
+								className="p-2 rounded-full text-mist hover:text-snow hover:bg-panel-2 transition-colors"
+								aria-label="Sign out"
+								title="Sign out"
+							>
+								<LogOut className="h-4 w-4" />
+							</button>
+						)}
 					</div>
 				</div>
 			</header>
 
 			<div className="max-w-5xl mx-auto px-4 sm:px-6 pt-6 pb-10">
-				{dbUnavailable && (
+				{dbUnavailable && !demo && (
 					<div className="mb-6 px-4 py-3 rounded-xl border border-warn/30 bg-warn/5 text-sm text-warn">
 						Couldn&apos;t reach the journal database — entries can&apos;t be
 						loaded or saved yet. The dashboard below will fill in once storage
@@ -206,7 +218,7 @@ export default function Dashboard() {
 								</div>
 								<span
 									className="h-1.5 w-1.5 rounded-full"
-									style={{ background: color ?? "#e8e5da" }}
+									style={{ background: color ?? "#e4e4e7" }}
 								/>
 							</div>
 						);
@@ -222,7 +234,7 @@ export default function Dashboard() {
 							<ScoreRing score={loading ? null : score} />
 							<p
 								className="mt-1 text-sm font-semibold"
-								style={{ color: band ? BAND_COLOR[band] : "#a39f93" }}
+								style={{ color: band ? BAND_COLOR[band] : "#a1a1aa" }}
 							>
 								{loading
 									? "Loading…"
@@ -365,6 +377,8 @@ export default function Dashboard() {
 			</div>
 
 			{/* Log entry modal */}
+			{showWelcome && <WelcomeModal onClose={() => setShowWelcome(false)} />}
+
 			{showLog && (
 				<div
 					className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-start justify-center overflow-y-auto p-4 sm:p-8"
@@ -439,7 +453,7 @@ function Contributor({
 }) {
 	const color =
 		fraction === null
-			? "#e8e5da"
+			? "#e4e4e7"
 			: BAND_COLOR[bandForScore(Math.round(fraction * 100))];
 	return (
 		<div>

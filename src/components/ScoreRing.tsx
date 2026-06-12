@@ -21,7 +21,7 @@ export default function ScoreRing({ score, size = 240, label = "Wellness" }: Pro
 	const trackLen = c * sweep;
 	const value = score ?? 0;
 	const fillLen = trackLen * (value / 100);
-	const color = score === null ? "#a39f93" : BAND_COLOR[bandForScore(score)];
+	const color = score === null ? "#a1a1aa" : BAND_COLOR[bandForScore(score)];
 
 	return (
 		<div
@@ -67,7 +67,7 @@ export default function ScoreRing({ score, size = 240, label = "Wellness" }: Pro
 			<div className="absolute inset-0 flex flex-col items-center justify-center">
 				<span
 					className="tnum font-display font-light leading-none"
-					style={{ fontSize: size * 0.3, color: score === null ? "#a39f93" : "#201b21" }}
+					style={{ fontSize: size * 0.3, color: score === null ? "#a1a1aa" : "#18181b" }}
 				>
 					{score === null ? "--" : value}
 				</span>

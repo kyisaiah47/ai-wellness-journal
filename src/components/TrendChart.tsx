@@ -124,27 +124,27 @@ export default function TrendChart({ points, onLog }: Props) {
 							/>
 							<XAxis
 								dataKey="label"
-								tick={{ fill: "#a39f93", fontSize: 11 }}
-								axisLine={{ stroke: "#e8e5da" }}
+								tick={{ fill: "#a1a1aa", fontSize: 11 }}
+								axisLine={{ stroke: "#e4e4e7" }}
 								tickLine={false}
 								minTickGap={28}
 							/>
 							<YAxis
 								domain={domain}
-								tick={{ fill: "#a39f93", fontSize: 11 }}
+								tick={{ fill: "#a1a1aa", fontSize: 11 }}
 								axisLine={false}
 								tickLine={false}
 								width={40}
 							/>
 							<Tooltip
 								contentStyle={{
-									background: "#f3f1e9",
-									border: "1px solid #e8e5da",
+									background: "#f4f4f5",
+									border: "1px solid #e4e4e7",
 									borderRadius: 10,
 									fontSize: 12,
-									color: "#201b21",
+									color: "#18181b",
 								}}
-								labelStyle={{ color: "#6b6860" }}
+								labelStyle={{ color: "#71717a" }}
 								formatter={(value: number | string) => [
 									value,
 									metric === "score"

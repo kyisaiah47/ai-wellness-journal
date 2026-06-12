@@ -2,22 +2,22 @@
 
 /*
  * Clean, warm light system (interview-tree feel):
- * paper-white canvas with the brand-sheet cream undertone,
+ * pure white canvas, neutral grays,
  * ink text, restrained teal/amber/red accents.
  * Token names kept from the dark era — values flipped.
  */
 @theme {
-	--color-ink: #faf9f3; /* page background (warm paper) */
+	--color-ink: #ffffff; /* page background (white) */
 	--color-panel: #ffffff; /* card surface */
-	--color-panel-2: #f3f1e9; /* raised / hover surface */
-	--color-edge: #e8e5da; /* hairline borders */
-	--color-snow: #201b21; /* primary text (brand ink) */
-	--color-mist: #6b6860; /* secondary text */
-	--color-faint: #a39f93; /* tertiary text */
+	--color-panel-2: #f4f4f5; /* raised / hover surface */
+	--color-edge: #e4e4e7; /* hairline borders */
+	--color-snow: #18181b; /* primary text (brand ink) */
+	--color-mist: #71717a; /* secondary text */
+	--color-faint: #a1a1aa; /* tertiary text */
 	--color-good: #0d9488; /* teal — good */
 	--color-warn: #d97706; /* amber — neutral */
 	--color-bad: #dc2626; /* red — bad */
-	--color-edge-bright: #d8d4c6; /* hover borders */
+	--color-edge-bright: #d4d4d8; /* hover borders */
 	--color-glow: rgba(13, 148, 136, 0.1); /* soft teal halo */
 
 	/* Sora carries the display voice (scores, stat values, headlines);
@@ -35,8 +35,8 @@ html {
 }
 
 body {
-	background: #faf9f3;
-	color: #201b21;
+	background: #ffffff;
+	color: #18181b;
 	font-family: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 }
@@ -149,23 +149,23 @@ body {
 	height: 10px;
 }
 ::-webkit-scrollbar-track {
-	background: #faf9f3;
+	background: #ffffff;
 }
 ::-webkit-scrollbar-thumb {
-	background: #e8e5da;
+	background: #e4e4e7;
 	border-radius: 5px;
-	border: 2px solid #faf9f3;
+	border: 2px solid #ffffff;
 }
 ::-webkit-scrollbar-thumb:hover {
-	background: #d8d4c6;
+	background: #d4d4d8;
 }
 
 /* Light form controls */
 input[type="date"],
 textarea {
-	color: #201b21;
+	color: #18181b;
 	background: #ffffff;
-	border: 1px solid #e8e5da;
+	border: 1px solid #e4e4e7;
 	border-radius: 10px;
 	font-size: 0.9375rem;
 	transition: border-color 0.15s ease, box-shadow 0.15s ease;
@@ -180,7 +180,7 @@ textarea:focus {
 
 input::placeholder,
 textarea::placeholder {
-	color: #a39f93;
+	color: #a1a1aa;
 	opacity: 1;
 }
 
@@ -195,7 +195,7 @@ input[type="range"] {
 	width: 100%;
 	height: 4px;
 	border-radius: 2px;
-	background: #e8e5da;
+	background: #e4e4e7;
 	outline: none;
 }
 input[type="range"]::-webkit-slider-thumb {
@@ -204,17 +204,17 @@ input[type="range"]::-webkit-slider-thumb {
 	width: 18px;
 	height: 18px;
 	border-radius: 50%;
-	background: #201b21;
-	border: 3px solid #faf9f3;
-	box-shadow: 0 0 0 1px #d8d4c6;
+	background: #18181b;
+	border: 3px solid #ffffff;
+	box-shadow: 0 0 0 1px #d4d4d8;
 	cursor: pointer;
 }
 input[type="range"]::-moz-range-thumb {
 	width: 18px;
 	height: 18px;
 	border-radius: 50%;
-	background: #201b21;
-	border: 3px solid #faf9f3;
-	box-shadow: 0 0 0 1px #d8d4c6;
+	background: #18181b;
+	border: 3px solid #ffffff;
+	box-shadow: 0 0 0 1px #d4d4d8;
 	cursor: pointer;
 }
