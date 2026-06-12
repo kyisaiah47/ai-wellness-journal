@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { SymptomAnalysis } from "@/lib/gemini";
 import { format } from "date-fns";
 import { Download, FileText, Printer, Loader } from "lucide-react";
-import { SymptomEntry } from "@/lib/supabase";
-import { analyzeSymptoms } from "@/lib/gemini";
+import type {
+	SymptomAnalysis,
+	WellnessEntry as SymptomEntry,
+} from "@/lib/types";
 
 interface Props {
 	entries: SymptomEntry[];
@@ -32,7 +33,13 @@ export default function DoctorReport({ entries }: Props) {
 				return entryDate >= startDate && entryDate <= endDate;
 			});
 
-			const analysis = await analyzeSymptoms(filteredEntries);
+			const res = await fetch("/api/analyze", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ action: "analyze", entries: filteredEntries }),
+			});
+			if (!res.ok) throw new Error("Analysis request failed");
+			const analysis: SymptomAnalysis = await res.json();
 			setReport({ ...analysis, entries: filteredEntries });
 		} catch (error) {
 			console.error("Error generating report:", error);

@@ -2,14 +2,15 @@
 
 import { useState, useEffect } from "react";
 import { Plus, Calendar, TrendingUp, FileText, Brain } from "lucide-react";
-import { supabase, SymptomEntry } from "@/lib/supabase";
+import { supabase, ENTRIES_TABLE } from "@/lib/supabase";
+import type { WellnessEntry } from "@/lib/types";
 import SymptomEntryForm from "@/components/SymptomEntryForm";
 import HealthTimeline from "@/components/HealthTimeline";
 import AIInsights from "@/components/AIInsights";
 import DoctorReport from "@/components/DoctorReport";
 
 export default function Dashboard() {
-	const [entries, setEntries] = useState<SymptomEntry[]>([]);
+	const [entries, setEntries] = useState<WellnessEntry[]>([]);
 	const [activeTab, setActiveTab] = useState<
 		"log" | "timeline" | "insights" | "report"
 	>("log");
@@ -22,7 +23,7 @@ export default function Dashboard() {
 	const loadEntries = async () => {
 		try {
 			const { data, error } = await supabase
-				.from("symptom_entries")
+				.from(ENTRIES_TABLE)
 				.select("*")
 				.order("date", { ascending: false });
 

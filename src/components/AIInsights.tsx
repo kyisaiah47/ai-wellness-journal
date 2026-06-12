@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { SymptomAnalysis } from "@/lib/gemini";
 import { Brain, TrendingUp, AlertTriangle, RefreshCw } from "lucide-react";
-import { SymptomEntry } from "@/lib/supabase";
-import { generateHealthInsights, analyzeSymptoms } from "@/lib/gemini";
+import type {
+	SymptomAnalysis,
+	WellnessEntry as SymptomEntry,
+} from "@/lib/types";
 
 interface Props {
 	entries: SymptomEntry[];
@@ -21,13 +22,28 @@ export default function AIInsights({ entries }: Props) {
 		setError("");
 
 		try {
-			// Generate insights
-			const healthInsights = await generateHealthInsights(entries);
-			setInsights(healthInsights);
+			// Both calls go through the server-side API route so the
+			// Anthropic key stays server-side only.
+			const [insightsRes, analysisRes] = await Promise.all([
+				fetch("/api/analyze", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ action: "insights", entries }),
+				}),
+				fetch("/api/analyze", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ action: "analyze", entries }),
+				}),
+			]);
 
-			// Generate overall analysis
-			const overallAnalysis = await analyzeSymptoms(entries);
-			setAnalysis(overallAnalysis);
+			if (!insightsRes.ok || !analysisRes.ok) {
+				throw new Error("Analysis request failed");
+			}
+
+			const { insights: healthInsights } = await insightsRes.json();
+			setInsights(healthInsights);
+			setAnalysis(await analysisRes.json());
 		} catch (err: unknown) {
 			setError("Failed to generate AI insights. Please try again.");
 			console.error("AI Insights Error:", err);

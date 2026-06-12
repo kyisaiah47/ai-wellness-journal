@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { format } from "date-fns";
 import { Calendar, Clock } from "lucide-react";
-import { SymptomEntry } from "@/lib/supabase";
+import type { WellnessEntry as SymptomEntry } from "@/lib/types";
 import {
 	LineChart,
 	Line,

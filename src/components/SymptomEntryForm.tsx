@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { supabase, ENTRIES_TABLE } from "@/lib/supabase";
 import { Mic, Camera, Save, AlertCircle } from "lucide-react";
 
 interface Props {
@@ -65,10 +65,10 @@ export default function SymptomEntryForm({ onEntryAdded }: Props) {
 		setError("");
 
 		try {
+			// user_id defaults to auth.uid() in the database; RLS scopes rows per user.
 			const { error: submitError } = await supabase
-				.from("symptom_entries")
+				.from(ENTRIES_TABLE)
 				.insert({
-					user_id: "demo-user", // In production, use actual user ID
 					date,
 					symptoms: selectedSymptoms,
 					severity,

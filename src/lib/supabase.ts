@@ -5,28 +5,18 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-// Database types
-export interface SymptomEntry {
-	id: string;
-	user_id: string;
-	date: string;
-	symptoms: string[];
-	severity: number;
-	notes: string;
-	voice_notes_url?: string;
-	photos_urls?: string[];
-	ai_summary?: string;
-	created_at: string;
-	updated_at: string;
-}
+// Table names. The Supabase project is shared with another production app,
+// so everything belonging to this app is prefixed with `wellness_`.
+export const ENTRIES_TABLE = "wellness_entries";
+export const REPORTS_TABLE = "wellness_reports";
 
-export interface HealthInsight {
+export type { WellnessEntry, SymptomAnalysis } from "@/lib/types";
+
+export interface WellnessReport {
 	id: string;
 	user_id: string;
-	entry_ids: string[];
-	insight_type: "pattern" | "correlation" | "recommendation" | "alert";
-	title: string;
-	description: string;
-	confidence_score: number;
+	period_start: string;
+	period_end: string;
+	analysis: Record<string, unknown>;
 	created_at: string;
 }
