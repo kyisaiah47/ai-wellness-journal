@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
-import Logo from "@/components/Logo";
+import Logo, { WaveBackdrop } from "@/components/Logo";
 
 type Mode = "signin" | "signup";
 
@@ -41,17 +41,18 @@ export default function AuthScreen() {
 	};
 
 	return (
-		<div className="min-h-screen flex items-center justify-center px-4">
-			<div className="w-full max-w-sm">
-				<div className="flex items-center justify-center gap-2 mb-8">
+		<div className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
+			<WaveBackdrop className="text-good/[0.04]" />
+			<div className="relative z-10 w-full max-w-sm">
+				<div className="flex items-center justify-center gap-2 mb-8 animate-fade-up">
 					<Logo className="h-5 w-5 text-good" />
 					<span className="text-sm font-semibold tracking-[0.18em] uppercase">
 						Charted
 					</span>
 				</div>
 
-				<div className="rounded-2xl bg-panel border border-edge p-6">
-					<h1 className="text-lg font-semibold text-snow mb-1">
+				<div className="rounded-2xl card p-6 animate-fade-up-delay-1">
+					<h1 className="font-display text-lg font-semibold text-snow mb-1">
 						{mode === "signin" ? "Welcome back" : "Create your journal"}
 					</h1>
 					<p className="text-sm text-mist mb-6">

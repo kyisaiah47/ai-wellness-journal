@@ -56,13 +56,17 @@ export default function ScoreRing({ score, size = 240, label = "Wellness" }: Pro
 						strokeWidth={stroke}
 						strokeLinecap="round"
 						strokeDasharray={`${fillLen} ${c}`}
-						style={{ transition: "stroke-dasharray 0.8s ease, stroke 0.3s ease" }}
+						className="animate-ring-draw"
+						style={{
+							["--ring-c" as string]: `${c}px`,
+							transition: "stroke-dasharray 0.8s ease, stroke 0.3s ease",
+						}}
 					/>
 				)}
 			</svg>
 			<div className="absolute inset-0 flex flex-col items-center justify-center">
 				<span
-					className="tnum font-extralight leading-none"
+					className="tnum font-display font-light leading-none"
 					style={{ fontSize: size * 0.3, color: score === null ? "#5b6770" : "#e6edf3" }}
 				>
 					{score === null ? "--" : value}

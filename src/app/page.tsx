@@ -6,7 +6,7 @@ import { Plus, X, LogOut } from "lucide-react";
 import type { Session } from "@supabase/supabase-js";
 import { supabase, ENTRIES_TABLE } from "@/lib/supabase";
 import Landing from "@/components/Landing";
-import Logo from "@/components/Logo";
+import Logo, { WaveBackdrop, WaveDivider } from "@/components/Logo";
 import type { WellnessEntry } from "@/lib/types";
 import {
 	dailyPoints,
@@ -184,7 +184,7 @@ export default function Dashboard() {
 				)}
 
 				{/* Day strip */}
-				<div className="flex justify-between sm:justify-center sm:gap-6 mb-8">
+				<div className="flex justify-between sm:justify-center sm:gap-6 mb-8 animate-fade-up">
 					{strip.map(({ date, point, isToday }) => {
 						const color = point ? BAND_COLOR[bandForScore(point.score)] : null;
 						return (
@@ -215,24 +215,28 @@ export default function Dashboard() {
 
 				{/* Hero: score dial + contributors */}
 				<section className="grid lg:grid-cols-[minmax(0,420px)_1fr] gap-4 mb-4">
-					<div className="rounded-2xl bg-panel border border-edge px-6 py-8 flex flex-col items-center justify-center">
-						<ScoreRing score={loading ? null : score} />
-						<p
-							className="mt-1 text-sm font-semibold"
-							style={{ color: band ? BAND_COLOR[band] : "#5b6770" }}
-						>
-							{loading
-								? "Loading…"
-								: band
-								? BAND_LABEL[band]
-								: "No log yet today"}
-						</p>
-						<p className="mt-1 text-xs text-faint">
-							{format(today, "EEEE, MMMM d")}
-						</p>
+					<div className="relative rounded-2xl card px-6 py-8 flex flex-col items-center justify-center overflow-hidden animate-fade-up-delay-1">
+						<WaveBackdrop className="text-good/[0.04]" />
+						<div className="score-glow absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2" />
+						<div className="relative flex flex-col items-center">
+							<ScoreRing score={loading ? null : score} />
+							<p
+								className="mt-1 text-sm font-semibold"
+								style={{ color: band ? BAND_COLOR[band] : "#5b6770" }}
+							>
+								{loading
+									? "Loading…"
+									: band
+									? BAND_LABEL[band]
+									: "No log yet today"}
+							</p>
+							<p className="mt-1 text-xs text-faint">
+								{format(today, "EEEE, MMMM d")}
+							</p>
+						</div>
 					</div>
 
-					<div className="rounded-2xl bg-panel border border-edge px-6 py-6">
+					<div className="rounded-2xl card px-6 py-6 animate-fade-up-delay-2">
 						<h2 className="text-[11px] font-semibold uppercase tracking-[0.25em] text-mist mb-5">
 							Contributors
 						</h2>
@@ -292,7 +296,7 @@ export default function Dashboard() {
 				</section>
 
 				{/* Stat cards */}
-				<section className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+				<section className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-4 animate-fade-up-delay-3">
 					<StatCard
 						label="Avg severity · 7d"
 						value={avg7Severity !== null ? avg7Severity.toFixed(1) : "--"}
@@ -328,9 +332,11 @@ export default function Dashboard() {
 				</section>
 
 				{/* Trend chart */}
-				<section className="mb-8">
+				<section className="mb-8 animate-fade-up-delay-4">
 					<TrendChart points={points} onLog={() => setShowLog(true)} />
 				</section>
+
+				<WaveDivider className="mb-8" />
 
 				{/* Section tabs */}
 				<nav className="flex gap-2 mb-4">
@@ -349,7 +355,7 @@ export default function Dashboard() {
 					))}
 				</nav>
 
-				<section className="rounded-2xl bg-panel border border-edge">
+				<section className="rounded-2xl card">
 					{activeTab === "timeline" && (
 						<HealthTimeline entries={entries} onLog={() => setShowLog(true)} />
 					)}
@@ -365,7 +371,7 @@ export default function Dashboard() {
 					onClick={() => setShowLog(false)}
 				>
 					<div
-						className="w-full max-w-2xl rounded-2xl bg-panel border border-edge my-4"
+						className="w-full max-w-2xl rounded-2xl card my-4 animate-fade-up"
 						onClick={(e) => e.stopPropagation()}
 					>
 						<div className="flex items-center justify-between px-6 pt-5">
@@ -481,12 +487,14 @@ function StatCard({
 	deltaGood: boolean | null;
 }) {
 	return (
-		<div className="rounded-2xl bg-panel border border-edge px-5 py-4">
+		<div className="rounded-2xl card card-lift px-5 py-4">
 			<p className="text-[11px] font-medium uppercase tracking-[0.15em] text-faint mb-2">
 				{label}
 			</p>
 			<div className="flex items-baseline gap-2">
-				<span className="text-3xl font-extralight tnum">{value}</span>
+				<span className="font-display text-3xl font-extralight tnum">
+					{value}
+				</span>
 				{delta && (
 					<span
 						className={`text-xs tnum ${

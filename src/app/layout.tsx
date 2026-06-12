@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Inter } from "next/font/google";
+import { Inter, Sora } from "next/font/google";
+import { WaveDivider } from "@/components/Logo";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const sora = Sora({ subsets: ["latin"], variable: "--font-sora" });
 
 export const metadata: Metadata = {
 	title: "Charted — Daily Wellness Tracking",
@@ -17,11 +19,12 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en" className={inter.variable}>
+		<html lang="en" className={`${inter.variable} ${sora.variable}`}>
 			<body className="min-h-screen bg-ink text-snow antialiased">
 				<main>{children}</main>
 
-				<footer className="border-t border-edge mt-16">
+				<footer className="mt-16">
+					<WaveDivider className="mb-0" />
 					<div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 flex flex-col gap-4">
 						<p className="text-xs leading-relaxed text-faint max-w-3xl">
 							<span className="font-semibold text-mist">

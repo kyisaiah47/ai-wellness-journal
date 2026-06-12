@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { WaveDivider } from "@/components/Logo";
 
 export const metadata: Metadata = {
 	title: "Privacy — Charted",
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
 	return (
-		<div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+		<div className="max-w-3xl mx-auto px-4 sm:px-6 py-12 animate-fade-up">
 			<Link
 				href="/"
 				className="text-sm text-mist hover:text-snow transition-colors"
@@ -16,8 +17,12 @@ export default function PrivacyPage() {
 				← Back to dashboard
 			</Link>
 
-			<h1 className="mt-6 mb-2 text-2xl font-semibold">Privacy policy</h1>
-			<p className="text-sm text-faint mb-10">Last updated June 12, 2026</p>
+			<h1 className="font-display mt-6 mb-2 text-2xl font-semibold">
+				Privacy policy
+			</h1>
+			<p className="text-sm text-faint mb-6">Last updated June 12, 2026</p>
+
+			<WaveDivider className="justify-start mb-10 [&>span:first-child]:hidden" />
 
 			<div className="space-y-8 text-sm leading-relaxed text-mist">
 				<section>
