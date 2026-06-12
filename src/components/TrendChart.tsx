@@ -28,9 +28,9 @@ const METRICS: { id: Metric; label: string }[] = [
 ];
 
 const METRIC_COLOR: Record<Metric, string> = {
-	score: "#0d9488",
-	severity: "#dc2626",
-	symptoms: "#d97706",
+	score: "#f47d31",
+	severity: "#3d3c3c",
+	symptoms: "#fcae17",
 };
 
 export default function TrendChart({ points, onLog }: Props) {

@@ -199,7 +199,7 @@ export default function Dashboard() {
 										isToday ? "ring-2 ring-snow/50" : ""
 									}`}
 									style={{
-										background: color ? `${color}22` : "#ffffff",
+										background: "#ffffff",
 										color: color ?? "#bcb0a2",
 									}}
 								>
@@ -309,13 +309,13 @@ export default function Dashboard() {
 				{/* Stat cards */}
 				<section className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-4 animate-fade-up-delay-3">
 					<StatCard
-						label="Avg severity · 7d"
+						label="Avg severity · 7d" fill="#f47d31" dark
 						value={avg7Severity !== null ? avg7Severity.toFixed(1) : "--"}
 						delta={deltaText(avgPrior7Severity, avg7Severity)}
 						deltaGood={isImprovement(avgPrior7Severity, avg7Severity, true)}
 					/>
 					<StatCard
-						label="Days logged · 7d"
+						label="Days logged · 7d" fill="#ffffff"
 						value={String(last7.length)}
 						delta={
 							prior7.length || last7.length
@@ -325,7 +325,7 @@ export default function Dashboard() {
 						deltaGood={isImprovement(prior7.length, last7.length, false)}
 					/>
 					<StatCard
-						label="Symptoms · 7d"
+						label="Symptoms · 7d" fill="#3d3c3c" dark
 						value={entries.length ? String(uniqueSymptoms7) : "--"}
 						delta={
 							uniqueSymptomsPrior7 || uniqueSymptoms7
@@ -335,7 +335,7 @@ export default function Dashboard() {
 						deltaGood={isImprovement(uniqueSymptomsPrior7, uniqueSymptoms7, true)}
 					/>
 					<StatCard
-						label="Best score · 7d"
+						label="Best score · 7d" fill="#3f9d6f" dark
 						value={bestScore7 !== null ? String(bestScore7) : "--"}
 						delta={null}
 						deltaGood={null}
@@ -477,35 +477,26 @@ function StatCard({
 	label,
 	value,
 	delta,
-	deltaGood,
+	fill,
+	dark,
 }: {
 	label: string;
 	value: string;
 	delta: string | null;
 	deltaGood: boolean | null;
+	fill: string;
+	dark?: boolean;
 }) {
+	const main = dark ? "text-white" : "text-snow";
+	const sub = dark ? "text-white/70" : "text-snow/60";
 	return (
-		<div className="rounded-2xl card card-lift px-5 py-4">
-			<p className="text-[11px] font-medium uppercase tracking-[0.15em] text-faint mb-2">
+		<div className="rounded-3xl px-5 py-5" style={{ background: fill }}>
+			<p className={`text-[11px] font-bold uppercase tracking-[0.15em] mb-2 ${sub}`}>
 				{label}
 			</p>
 			<div className="flex items-baseline gap-2">
-				<span className="font-display text-3xl font-extralight tnum">
-					{value}
-				</span>
-				{delta && (
-					<span
-						className={`text-xs tnum ${
-							deltaGood === null
-								? "text-faint"
-								: deltaGood
-								? "text-good"
-								: "text-bad"
-						}`}
-					>
-						{delta}
-					</span>
-				)}
+				<span className={`font-display text-3xl font-bold tnum ${main}`}>{value}</span>
+				{delta && <span className={`text-xs tnum font-semibold ${sub}`}>{delta}</span>}
 			</div>
 		</div>
 	);

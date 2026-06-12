@@ -48,7 +48,7 @@ export function AppSidebar({
 		<Sidebar collapsible="offcanvas" {...props}>
 			<SidebarHeader>
 				<div className="flex items-center gap-2 px-2 py-1.5">
-					<Logo className="h-5 w-5 text-good" />
+					<Logo className="h-5 w-5 text-white" />
 					<span className="font-display text-base font-bold tracking-tight">
 						Charted
 					</span>
@@ -61,7 +61,7 @@ export function AppSidebar({
 							<SidebarMenuItem>
 								<SidebarMenuButton
 									onClick={onLog}
-									className="bg-spark text-white font-semibold hover:bg-spark/90 hover:text-white justify-center mb-2"
+									className="bg-[#3d3c3c] text-white font-semibold hover:bg-[#3d3c3c]/90 hover:text-white justify-center mb-2"
 								>
 									<PlusIcon />
 									<span>{demo ? "Start your journal" : "How was today?"}</span>
