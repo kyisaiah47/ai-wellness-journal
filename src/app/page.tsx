@@ -5,7 +5,8 @@ import { format, subDays, isSameDay } from "date-fns";
 import { Plus, X, LogOut } from "lucide-react";
 import type { Session } from "@supabase/supabase-js";
 import { supabase, ENTRIES_TABLE } from "@/lib/supabase";
-import AuthScreen from "@/components/AuthScreen";
+import Landing from "@/components/Landing";
+import Logo from "@/components/Logo";
 import type { WellnessEntry } from "@/lib/types";
 import {
 	dailyPoints,
@@ -139,7 +140,7 @@ export default function Dashboard() {
 		return <div className="min-h-screen" />;
 	}
 	if (!session) {
-		return <AuthScreen />;
+		return <Landing />;
 	}
 
 	return (
@@ -148,7 +149,7 @@ export default function Dashboard() {
 			<header className="sticky top-0 z-40 bg-ink/90 backdrop-blur border-b border-edge">
 				<div className="max-w-5xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
 					<div className="flex items-center gap-2">
-						<span className="h-2 w-2 rounded-full bg-good" />
+						<Logo className="h-5 w-5 text-good" />
 						<span className="text-sm font-semibold tracking-[0.18em] uppercase">
 							Charted
 						</span>

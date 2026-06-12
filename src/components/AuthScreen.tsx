@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
+import Logo from "@/components/Logo";
 
 type Mode = "signin" | "signup";
 
@@ -43,7 +44,7 @@ export default function AuthScreen() {
 		<div className="min-h-screen flex items-center justify-center px-4">
 			<div className="w-full max-w-sm">
 				<div className="flex items-center justify-center gap-2 mb-8">
-					<span className="h-2 w-2 rounded-full bg-good" />
+					<Logo className="h-5 w-5 text-good" />
 					<span className="text-sm font-semibold tracking-[0.18em] uppercase">
 						Charted
 					</span>
