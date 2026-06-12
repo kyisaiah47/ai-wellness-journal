@@ -2,8 +2,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { format, subDays, isSameDay } from "date-fns";
-import { Plus, X } from "lucide-react";
+import { Plus, X, LogOut } from "lucide-react";
+import type { Session } from "@supabase/supabase-js";
 import { supabase, ENTRIES_TABLE } from "@/lib/supabase";
+import AuthScreen from "@/components/AuthScreen";
 import type { WellnessEntry } from "@/lib/types";
 import {
 	dailyPoints,
@@ -27,10 +29,31 @@ export default function Dashboard() {
 	const [loading, setLoading] = useState(true);
 	const [dbUnavailable, setDbUnavailable] = useState(false);
 	const [showLog, setShowLog] = useState(false);
+	const [session, setSession] = useState<Session | null>(null);
+	const [authReady, setAuthReady] = useState(false);
 
 	useEffect(() => {
-		loadEntries();
+		supabase.auth.getSession().then(({ data }) => {
+			setSession(data.session);
+			setAuthReady(true);
+		});
+		const {
+			data: { subscription },
+		} = supabase.auth.onAuthStateChange((_event, newSession) => {
+			setSession(newSession);
+		});
+		return () => subscription.unsubscribe();
 	}, []);
+
+	useEffect(() => {
+		if (session) {
+			setLoading(true);
+			loadEntries();
+		} else {
+			setEntries([]);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [session?.user.id]);
 
 	const loadEntries = async () => {
 		try {
@@ -112,6 +135,13 @@ export default function Dashboard() {
 		{ id: "report", label: "Doctor report" },
 	];
 
+	if (!authReady) {
+		return <div className="min-h-screen" />;
+	}
+	if (!session) {
+		return <AuthScreen />;
+	}
+
 	return (
 		<div className="min-h-screen">
 			{/* Top bar */}
@@ -123,13 +153,23 @@ export default function Dashboard() {
 							Charted
 						</span>
 					</div>
-					<button
-						onClick={() => setShowLog(true)}
-						className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-good text-ink text-sm font-semibold hover:opacity-90 transition-opacity"
-					>
-						<Plus className="h-4 w-4" strokeWidth={2.5} />
-						Log entry
-					</button>
+					<div className="flex items-center gap-2">
+						<button
+							onClick={() => setShowLog(true)}
+							className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-good text-ink text-sm font-semibold hover:opacity-90 transition-opacity"
+						>
+							<Plus className="h-4 w-4" strokeWidth={2.5} />
+							Log entry
+						</button>
+						<button
+							onClick={() => supabase.auth.signOut()}
+							className="p-2 rounded-full text-mist hover:text-snow hover:bg-panel-2 transition-colors"
+							aria-label="Sign out"
+							title="Sign out"
+						>
+							<LogOut className="h-4 w-4" />
+						</button>
+					</div>
 				</div>
 			</header>
 
