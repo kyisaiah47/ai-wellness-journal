@@ -7,18 +7,46 @@
  * Token names kept from the dark era — values flipped.
  */
 @theme {
-	--color-ink: #ffffff; /* page background (white) */
+	--color-ink: #faf3ec; /* page background (soft warm canvas) */
 	--color-panel: #ffffff; /* card surface */
-	--color-panel-2: #f4f4f5; /* raised / hover surface */
-	--color-edge: #e4e4e7; /* hairline borders */
-	--color-snow: #18181b; /* primary text (brand ink) */
-	--color-mist: #71717a; /* secondary text */
-	--color-faint: #a1a1aa; /* tertiary text */
-	--color-good: #0d9488; /* teal — good */
-	--color-warn: #d97706; /* amber — neutral */
-	--color-bad: #dc2626; /* red — bad */
-	--color-edge-bright: #d4d4d8; /* hover borders */
-	--color-glow: rgba(13, 148, 136, 0.1); /* soft teal halo */
+	--color-panel-2: #f7efe5; /* raised / hover surface */
+	--color-edge: #f0e6d9; /* hairline borders */
+	--color-snow: #2b2723; /* primary text (warm ink) */
+	--color-mist: #8a8076; /* secondary text */
+	--color-faint: #bcb0a2; /* tertiary text */
+	--color-good: #3f9d6f; /* fresh green */
+	--color-warn: #e1903e; /* warm amber */
+	--color-bad: #d96f59; /* warm coral */
+	--color-edge-bright: #e3d6c5; /* hover borders */
+	--color-glow: rgba(63, 157, 111, 0.12); /* soft green halo */
+
+	/* shadcn semantic tokens (sidebar block) mapped to the warm palette */
+	--color-background: #faf3ec;
+	--color-foreground: #2b2723;
+	--color-card: #ffffff;
+	--color-card-foreground: #2b2723;
+	--color-popover: #ffffff;
+	--color-popover-foreground: #2b2723;
+	--color-primary: #2b2723;
+	--color-primary-foreground: #fffdf9;
+	--color-secondary: #f7efe5;
+	--color-secondary-foreground: #2b2723;
+	--color-muted: #f7efe5;
+	--color-muted-foreground: #8a8076;
+	--color-accent: #f3e9db;
+	--color-accent-foreground: #2b2723;
+	--color-destructive: #d96f59;
+	--color-border: #f0e6d9;
+	--color-input: #f0e6d9;
+	--color-ring: #3f9d6f;
+	--color-sidebar: #fffdf9;
+	--color-sidebar-foreground: #2b2723;
+	--color-sidebar-primary: #2b2723;
+	--color-sidebar-primary-foreground: #fffdf9;
+	--color-sidebar-accent: #f3e9db;
+	--color-sidebar-accent-foreground: #2b2723;
+	--color-sidebar-border: #f0e6d9;
+	--color-sidebar-ring: #3f9d6f;
 
 	/* Sora carries the display voice (scores, stat values, headlines);
 	   Inter stays on body copy. */

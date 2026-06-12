@@ -2,12 +2,15 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { format, subDays, isSameDay } from "date-fns";
-import { Plus, X, LogOut } from "lucide-react";
+import { X } from "lucide-react";
 import type { Session } from "@supabase/supabase-js";
 import { supabase, ENTRIES_TABLE } from "@/lib/supabase";
 import WelcomeModal from "@/components/WelcomeModal";
-import Logo, { WaveBackdrop, WaveDivider } from "@/components/Logo";
+import { WaveDivider } from "@/components/Logo";
 import { SAMPLE_ENTRIES } from "@/lib/sample";
+import { AppSidebar } from "@/components/app-sidebar";
+import { SiteHeader } from "@/components/site-header";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import type { WellnessEntry } from "@/lib/types";
 import {
 	dailyPoints,
@@ -15,8 +18,9 @@ import {
 	bandForScore,
 	BAND_COLOR,
 	BAND_LABEL,
+	BAND_GRADIENT,
 } from "@/lib/score";
-import ScoreRing from "@/components/ScoreRing";
+import DayBlob from "@/components/DayBlob";
 import SymptomEntryForm from "@/components/SymptomEntryForm";
 import HealthTimeline from "@/components/HealthTimeline";
 import AIInsights from "@/components/AIInsights";
@@ -138,55 +142,33 @@ export default function Dashboard() {
 		return { date: d, point: p, isToday: isSameDay(d, today) };
 	});
 
-	const tabs: { id: Tab; label: string }[] = [
-		{ id: "timeline", label: "Timeline" },
-		{ id: "insights", label: "Insights" },
-		{ id: "report", label: "Doctor report" },
-	];
 
 	if (!authReady) {
 		return <div className="min-h-screen" />;
 	}
 
-	return (
-		<div className="min-h-screen">
-			{/* Top bar */}
-			<header className="sticky top-0 z-40 bg-ink/90 backdrop-blur border-b border-edge">
-				<div className="max-w-5xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
-					<div className="flex items-center gap-2">
-						<Logo className="h-5 w-5 text-good" />
-						<span className="text-sm font-semibold tracking-[0.18em] uppercase">
-							Charted
-						</span>
-					</div>
-					<div className="flex items-center gap-2">
-						{demo && (
-							<span className="hidden sm:inline text-xs text-faint mr-1">
-								Sample journal
-							</span>
-						)}
-						<button
-							onClick={() => (demo ? setShowWelcome(true) : setShowLog(true))}
-							className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-snow text-ink text-sm font-semibold hover:opacity-90 transition-opacity"
-						>
-							<Plus className="h-4 w-4" strokeWidth={2.5} />
-							{demo ? "Start yours" : "Log entry"}
-						</button>
-						{!demo && (
-							<button
-								onClick={() => supabase.auth.signOut()}
-								className="p-2 rounded-full text-mist hover:text-snow hover:bg-panel-2 transition-colors"
-								aria-label="Sign out"
-								title="Sign out"
-							>
-								<LogOut className="h-4 w-4" />
-							</button>
-						)}
-					</div>
-				</div>
-			</header>
+	const openLog = () => (demo ? setShowWelcome(true) : setShowLog(true));
 
-			<div className="max-w-5xl mx-auto px-4 sm:px-6 pt-6 pb-10">
+	return (
+		<SidebarProvider
+			style={
+				{
+					"--sidebar-width": "calc(var(--spacing) * 72)",
+					"--header-height": "calc(var(--spacing) * 12)",
+				} as React.CSSProperties
+			}
+		>
+			<AppSidebar
+				variant="inset"
+				active={activeTab}
+				onSectionSelect={setActiveTab}
+				demo={demo}
+				onLog={openLog}
+				onSignOut={() => supabase.auth.signOut()}
+			/>
+			<SidebarInset>
+				<SiteHeader demo={demo} onLog={openLog} />
+				<div className="flex flex-1 flex-col p-4 md:p-6 max-w-6xl w-full mx-auto">
 				{dbUnavailable && !demo && (
 					<div className="mb-6 px-4 py-3 rounded-xl border border-warn/30 bg-warn/5 text-sm text-warn">
 						Couldn&apos;t reach the journal database — entries can&apos;t be
@@ -194,6 +176,16 @@ export default function Dashboard() {
 						is available.
 					</div>
 				)}
+
+				{/* Greeting */}
+				<div className="mb-6 animate-fade-up">
+					<p className="text-sm text-mist">
+						{demo ? "Welcome to Charted — this is a sample month" : "Welcome back"}
+					</p>
+					<h1 className="font-display text-2xl font-bold text-snow">
+						How are you feeling today?
+					</h1>
+				</div>
 
 				{/* Day strip */}
 				<div className="flex justify-between sm:justify-center sm:gap-6 mb-8 animate-fade-up">
@@ -225,32 +217,46 @@ export default function Dashboard() {
 					})}
 				</div>
 
-				{/* Hero: score dial + contributors */}
+				{/* Hero: today's day-card + breakdown */}
 				<section className="grid lg:grid-cols-[minmax(0,420px)_1fr] gap-4 mb-4">
-					<div className="relative rounded-2xl card px-6 py-8 flex flex-col items-center justify-center overflow-hidden animate-fade-up-delay-1">
-						<WaveBackdrop className="text-good/[0.04]" />
-						<div className="score-glow absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2" />
-						<div className="relative flex flex-col items-center">
-							<ScoreRing score={loading ? null : score} />
-							<p
-								className="mt-1 text-sm font-semibold"
-								style={{ color: band ? BAND_COLOR[band] : "#a1a1aa" }}
-							>
-								{loading
-									? "Loading…"
-									: band
-									? BAND_LABEL[band]
-									: "No log yet today"}
-							</p>
-							<p className="mt-1 text-xs text-faint">
+					<div
+						className="relative rounded-3xl px-7 py-7 flex flex-col justify-between overflow-hidden animate-fade-up-delay-1 min-h-[260px]"
+						style={{ background: BAND_GRADIENT[band ?? "none"] }}
+					>
+						<DayBlob
+							band={band ?? "none"}
+							className="absolute -right-8 -bottom-10 h-48 w-48 opacity-95"
+						/>
+						<div className="relative">
+							<p className="text-sm font-semibold text-snow/70">
 								{format(today, "EEEE, MMMM d")}
 							</p>
 						</div>
+						<div className="relative">
+							<p className="font-display text-6xl font-bold tnum text-snow">
+								{loading ? "–" : score !== null ? score : "–"}
+							</p>
+							<p className="mt-1 text-base font-semibold text-snow/85">
+								{loading
+									? "One sec…"
+									: band
+									? BAND_LABEL[band]
+									: "Nothing logged yet today"}
+							</p>
+							{!loading && !band && (
+								<button
+									onClick={() => (demo ? setShowWelcome(true) : setShowLog(true))}
+									className="mt-3 px-4 py-2 rounded-full bg-snow text-ink text-sm font-semibold hover:opacity-90 transition-opacity"
+								>
+									How was today?
+								</button>
+							)}
+						</div>
 					</div>
 
-					<div className="rounded-2xl card px-6 py-6 animate-fade-up-delay-2">
-						<h2 className="text-[11px] font-semibold uppercase tracking-[0.25em] text-mist mb-5">
-							Contributors
+					<div className="rounded-3xl card px-6 py-6 animate-fade-up-delay-2">
+						<h2 className="text-sm font-display font-semibold text-snow mb-5">
+							Today, up close
 						</h2>
 						<div className="space-y-5">
 							<Contributor
@@ -350,24 +356,7 @@ export default function Dashboard() {
 
 				<WaveDivider className="mb-8" />
 
-				{/* Section tabs */}
-				<nav className="flex gap-2 mb-4">
-					{tabs.map((tab) => (
-						<button
-							key={tab.id}
-							onClick={() => setActiveTab(tab.id)}
-							className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-								activeTab === tab.id
-									? "bg-panel-2 text-snow border border-edge"
-									: "text-mist hover:text-snow border border-transparent"
-							}`}
-						>
-							{tab.label}
-						</button>
-					))}
-				</nav>
-
-				<section className="rounded-2xl card">
+				<section className="rounded-3xl card">
 					{activeTab === "timeline" && (
 						<HealthTimeline entries={entries} onLog={() => setShowLog(true)} />
 					)}
@@ -409,7 +398,8 @@ export default function Dashboard() {
 					</div>
 				</div>
 			)}
-		</div>
+			</SidebarInset>
+		</SidebarProvider>
 	);
 }
 

@@ -20,15 +20,24 @@ export function bandForScore(score: number): ScoreBand {
 }
 
 export const BAND_COLOR: Record<ScoreBand, string> = {
-	good: "#0d9488", // teal
-	neutral: "#d97706", // restrained yellow
-	bad: "#dc2626", // red
+	good: "#3f9d6f", // fresh green
+	neutral: "#e1903e", // warm amber
+	bad: "#d96f59", // warm coral (not alarm red)
 };
 
 export const BAND_LABEL: Record<ScoreBand, string> = {
 	good: "Feeling good",
 	neutral: "Take it easy",
 	bad: "Rough day",
+};
+
+/* Illustrated-cover gradients for the day card — green mountains on a good
+   day, warm sunset on a rough one. */
+export const BAND_GRADIENT: Record<ScoreBand | "none", string> = {
+	good: "linear-gradient(140deg, #c9e9c8 0%, #84cb9d 55%, #4fa57f 100%)",
+	neutral: "linear-gradient(140deg, #ffdcab 0%, #f5a45e 60%, #e3814a 100%)",
+	bad: "linear-gradient(140deg, #f6b48d 0%, #e57e5d 55%, #c95f4d 100%)",
+	none: "linear-gradient(140deg, #f4ece1 0%, #e7d8c6 100%)",
 };
 
 export interface DayPoint {
