@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-	title: "AI Symptom Journal - Track Your Health",
+	title: "Pulse Journal — Daily Wellness Tracking",
 	description:
-		"Intelligent health tracking with AI-powered insights for better preventive care",
+		"Log daily symptoms, watch your wellness score, and generate AI-assisted summaries and doctor-ready reports.",
 };
 
 export default function RootLayout({
@@ -16,11 +17,40 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en">
-			<body className={inter.className}>
-				<div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
-					<main>{children}</main>
-				</div>
+		<html lang="en" className={inter.variable}>
+			<body className="min-h-screen bg-ink text-snow antialiased">
+				<main>{children}</main>
+
+				<footer className="border-t border-edge mt-16">
+					<div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 flex flex-col gap-4">
+						<p className="text-xs leading-relaxed text-faint max-w-3xl">
+							<span className="font-semibold text-mist">
+								Not medical advice.
+							</span>{" "}
+							Pulse Journal is a personal symptom log. Scores, insights, and
+							reports are generated from your own entries for informational
+							purposes only — they are not a diagnosis and are no substitute
+							for professional medical examination or advice. If you are
+							concerned about your health, talk to a doctor. In an emergency,
+							call your local emergency number.
+						</p>
+						<div className="flex items-center gap-5 text-xs text-faint">
+							<span>© {new Date().getFullYear()} Pulse Journal</span>
+							<Link
+								href="/privacy"
+								className="hover:text-snow transition-colors underline underline-offset-2"
+							>
+								Privacy
+							</Link>
+							<a
+								href="mailto:kyisaiah47@gmail.com"
+								className="hover:text-snow transition-colors underline underline-offset-2"
+							>
+								Contact
+							</a>
+						</div>
+					</div>
+				</footer>
 			</body>
 		</html>
 	);

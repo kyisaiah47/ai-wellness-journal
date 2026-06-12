@@ -1,68 +1,119 @@
 @import "tailwindcss";
 
+/*
+ * Whoop / Oura inspired dark system:
+ * near-black canvas, soft panel surfaces, restrained teal/yellow/red accents.
+ */
+@theme {
+	--color-ink: #0a0e12; /* page background */
+	--color-panel: #11161c; /* card surface */
+	--color-panel-2: #161d24; /* raised / hover surface */
+	--color-edge: #1f2933; /* hairline borders */
+	--color-snow: #e6edf3; /* primary text */
+	--color-mist: #8b98a5; /* secondary text */
+	--color-faint: #5b6770; /* tertiary text */
+	--color-good: #2dd4bf; /* teal — good */
+	--color-warn: #facc15; /* yellow — neutral */
+	--color-bad: #f87171; /* red — bad */
+}
+
 :root {
-	/* Color variables for cozy journal theme */
-	--background: #f7f3f0;
-	--foreground: #3c2e26;
-	--primary: #8b5a3c;
-	--secondary: #d4b896;
-	--accent: #a0785d;
-	--warm-white: #faf8f5;
-	--soft-brown: #6b4e3d;
+	color-scheme: dark;
 }
 
-input[type="text"],
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	background: #0a0e12;
+	color: #e6edf3;
+	font-family: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Stat numerals line up like a sports dashboard */
+.tnum {
+	font-variant-numeric: tabular-nums;
+	font-feature-settings: "tnum";
+}
+
+::selection {
+	background: rgba(45, 212, 191, 0.25);
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+::-webkit-scrollbar-track {
+	background: #0a0e12;
+}
+::-webkit-scrollbar-thumb {
+	background: #1f2933;
+	border-radius: 5px;
+	border: 2px solid #0a0e12;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: #2a3744;
+}
+
+/* Dark-native form controls */
 input[type="date"],
-input[type="range"],
 textarea {
-	color: #3c2e26 !important;
-	background: #faf8f5 !important;
-	border: 2px solid #d4b896 !important;
-	border-radius: 8px;
-	font-size: 1rem;
-	box-shadow: inset 0 1px 3px rgba(139, 90, 60, 0.1);
-	transition: all 0.2s ease;
+	color: #e6edf3;
+	background: #161d24;
+	border: 1px solid #1f2933;
+	border-radius: 10px;
+	font-size: 0.9375rem;
+	transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-input[type="text"]:focus,
 input[type="date"]:focus,
 textarea:focus {
-	border-color: #8b5a3c !important;
-	box-shadow: 0 0 0 3px rgba(139, 90, 60, 0.1),
-		inset 0 1px 3px rgba(139, 90, 60, 0.1);
+	border-color: #2dd4bf;
+	box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.12);
 	outline: none;
 }
 
 input::placeholder,
 textarea::placeholder {
-	color: #8a7264 !important;
-	opacity: 1 !important;
+	color: #5b6770;
+	opacity: 1;
 }
 
-/* Removed invalid @theme inline block. Use Tailwind config for custom theme if needed. */
-
-@media (prefers-color-scheme: dark) {
-	:root {
-		--background: #2d1f1a;
-		--foreground: #f0e6d9;
-		--primary: #b8845f;
-		--secondary: #8a6b47;
-		--warm-white: #3a2b24;
-	}
+input[type="date"]::-webkit-calendar-picker-indicator {
+	filter: invert(0.7);
+	cursor: pointer;
 }
 
-body {
-	background: var(--background);
-	color: var(--foreground);
-	font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
-	background-image: radial-gradient(
-			circle at 25% 25%,
-			rgba(139, 90, 60, 0.1) 0%,
-			transparent 50%
-		),
-		radial-gradient(
-			circle at 75% 75%,
-			rgba(212, 184, 150, 0.1) 0%,
-			transparent 50%
-		);
+/* Severity slider */
+input[type="range"] {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 100%;
+	height: 4px;
+	border-radius: 2px;
+	background: #1f2933;
+	outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background: #e6edf3;
+	border: 3px solid #0a0e12;
+	box-shadow: 0 0 0 1px #2a3744;
+	cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb {
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background: #e6edf3;
+	border: 3px solid #0a0e12;
+	box-shadow: 0 0 0 1px #2a3744;
+	cursor: pointer;
 }
