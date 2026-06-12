@@ -26,11 +26,11 @@ import AIInsights from "@/components/AIInsights";
 import DoctorReport from "@/components/DoctorReport";
 import TrendChart from "@/components/TrendChart";
 
-type Tab = "timeline" | "insights" | "report";
+type Tab = "overview" | "timeline" | "insights" | "report";
 
 export default function Dashboard() {
 	const [entries, setEntries] = useState<WellnessEntry[]>([]);
-	const [activeTab, setActiveTab] = useState<Tab>("timeline");
+	const [activeTab, setActiveTab] = useState<Tab>("overview");
 	const [loading, setLoading] = useState(true);
 	const [dbUnavailable, setDbUnavailable] = useState(false);
 	const [showLog, setShowLog] = useState(false);
@@ -176,7 +176,7 @@ export default function Dashboard() {
 					</div>
 				)}
 
-				{activeTab === "timeline" && (
+				{activeTab === "overview" && (
 				<>
 				{/* Greeting */}
 				<div className="mb-6 flex items-end justify-between animate-fade-up">
@@ -350,13 +350,15 @@ export default function Dashboard() {
 				</>
 				)}
 
-				<section className={activeTab === "timeline" ? "rounded-3xl card" : "rounded-3xl card animate-fade-up"}>
-					{activeTab === "timeline" && (
-						<HealthTimeline entries={entries} onLog={() => setShowLog(true)} />
-					)}
-					{activeTab === "insights" && <AIInsights entries={entries} />}
-					{activeTab === "report" && <DoctorReport entries={entries} />}
-				</section>
+				{activeTab !== "overview" && (
+					<section className="rounded-3xl card animate-fade-up">
+						{activeTab === "timeline" && (
+							<HealthTimeline entries={entries} onLog={openLog} />
+						)}
+						{activeTab === "insights" && <AIInsights entries={entries} />}
+						{activeTab === "report" && <DoctorReport entries={entries} />}
+					</section>
+				)}
 			</div>
 
 			{/* Log entry modal */}

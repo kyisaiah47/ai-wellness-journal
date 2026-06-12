@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import {
+	LayoutDashboardIcon,
 	CalendarDaysIcon,
 	SparklesIcon,
 	FileTextIcon,
@@ -22,10 +23,11 @@ import {
 } from "@/components/ui/sidebar";
 import Logo from "@/components/Logo";
 
-export type Section = "timeline" | "insights" | "report";
+export type Section = "overview" | "timeline" | "insights" | "report";
 
 const SECTIONS: { id: Section; title: string; icon: React.ReactNode }[] = [
-	{ id: "timeline", title: "Journal", icon: <CalendarDaysIcon /> },
+	{ id: "overview", title: "Overview", icon: <LayoutDashboardIcon /> },
+	{ id: "timeline", title: "Timeline", icon: <CalendarDaysIcon /> },
 	{ id: "insights", title: "Insights", icon: <SparklesIcon /> },
 	{ id: "report", title: "Doctor report", icon: <FileTextIcon /> },
 ];
